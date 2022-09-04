@@ -3,114 +3,177 @@ package style
 import "strings"
 
 const (
-	Prefix   = string("\u001b[")
-	Bld      = "1"
-	Lite     = "2"
-	Ital     = "3"
-	Underln  = "4"
-	Blnk     = "5"
-	Bldd     = "6"
-	Inv      = "7"
-	Invz     = "8"
-	Crs      = "9"
-	DUnder   = "21"
-	Normal   = "22"
-	XItalic  = "23"
-	XUnder   = "24"
-	Steady   = "25"
-	Positive = "27"
-	Visible  = "28"
-	XCross   = "29"
-	Suffix   = "m"
-	Rst      = "0"
+	prefix          = string("\u001b[")
+	bold            = "1"
+	light           = "2"
+	italic          = "3"
+	underline       = "4"
+	blink           = "5"
+	bold2           = "6"
+	invert          = "7"
+	invisible       = "8"
+	cross           = "9"
+	doubleUnderline = "21"
+	normal          = "22"
+	unitalic        = "23"
+	ununderlined    = "24"
+	steady          = "25"
+	positive        = "27"
+	visible         = "28"
+	uncross         = "29"
+	suffix          = "m"
+	reset           = "0"
 )
 
 // Bold makes text bold
 func Bold(s ...string) string {
 	if len(s) > 0 {
-		out := Prefix + Bld + Suffix + strings.Join(s, " ") + Prefix + Rst + Suffix
+		out := prefix + bold + suffix + strings.Join(s, " ") + prefix + reset + suffix
 		return out
 	}
-	return Prefix + Bld + Suffix
+	return prefix + bold + suffix
 }
 
 // Light makes text Light
 func Light(s ...string) string {
 	if len(s) > 0 {
-		out := Prefix + Lite + Suffix + strings.Join(s, " ") + Prefix + Rst + Suffix
+		out := prefix + light + suffix + strings.Join(s, " ") + prefix + reset + suffix
 		return out
 	}
-	return Prefix + Lite + Suffix
+	return prefix + light + suffix
 }
 
 // Italic makes text Italic
 func Italic(s ...string) string {
 	if len(s) > 0 {
-		out := Prefix + Ital + Suffix + strings.Join(s, " ") + Prefix + Rst + Suffix
+		out := prefix + italic + suffix + strings.Join(s, " ") + prefix + reset + suffix
 		return out
 	}
-	return Prefix + Ital + Suffix
+	return prefix + italic + suffix
 }
 
 // Underline makes text Underline
 func Underline(s ...string) string {
 	if len(s) > 0 {
-		out := Prefix + Underln + Suffix + strings.Join(s, " ") + Prefix + Rst + Suffix
+		out := prefix + underline + suffix + strings.Join(s, " ") + prefix + reset + suffix
 		return out
 	}
-	return Prefix + Underln + Suffix
+	return prefix + underline + suffix
 }
 
 // Blink makes text Blink
 func Blink(s ...string) string {
 	if len(s) > 0 {
-		out := Prefix + Blnk + Suffix + strings.Join(s, " ") + Prefix + Rst + Suffix
+		out := prefix + blink + suffix + strings.Join(s, " ") + prefix + reset + suffix
 		return out
 	}
-	return Prefix + Blnk + Suffix
+	return prefix + blink + suffix
 }
 
 // Bold2 makes text Bold2
 func Bold2(s ...string) string {
 	if len(s) > 0 {
-		out := Prefix + Bldd + Suffix + strings.Join(s, " ") + Prefix + Rst + Suffix
+		out := prefix + bold2 + suffix + strings.Join(s, " ") + prefix + reset + suffix
 		return out
 	}
-	return Prefix + Bldd + Suffix
+	return prefix + bold2 + suffix
+}
+
+// Invert makes text inverted in apearance
+func Invert(s ...string) string {
+	if len(s) > 0 {
+		out := prefix + invert + suffix + strings.Join(s, " ") + prefix + reset + suffix
+		return out
+	}
+	return prefix + invert + suffix
 }
 
 // Invisible makes text Invisible
 func Invisible(s ...string) string {
 	if len(s) > 0 {
-		out := Prefix + Inv + Suffix + strings.Join(s, " ") + Prefix + Rst + Suffix
+		out := prefix + invisible + suffix + strings.Join(s, " ") + prefix + reset + suffix
 		return out
 	}
-	return Prefix + Inv + Suffix
-}
-
-// Invisible2 makes text Invisible2
-func Invisible2(s ...string) string {
-	if len(s) > 0 {
-		out := Prefix + Invz + Suffix + strings.Join(s, " ") + Prefix + Rst + Suffix
-		return out
-	}
-	return Prefix + Invz + Suffix
+	return prefix + invisible + suffix
 }
 
 // Cross makes text Cross
 func Cross(s ...string) string {
 	if len(s) > 0 {
-		out := Prefix + Crs + Suffix + strings.Join(s, " ") + Prefix + Rst + Suffix
+		out := prefix + cross + suffix + strings.Join(s, " ") + prefix + reset + suffix
 		return out
 	}
-	return Prefix + Crs + Suffix
+	return prefix + cross + suffix
 }
 
 // DoubleUnderline makes text DoubleUnderline
 func DoubleUnderline(s ...string) string {
 	if len(s) > 0 {
-		out := Prefix + DUnder + Suffix + strings.Join(s, " ") + Prefix + Rst + Suffix
+		out := prefix + doubleUnderline + suffix + strings.Join(s, " ") + prefix + reset + suffix
 		return out
 	}
-	return Prefix + DUnder + Suffix
+	return prefix + doubleUnderline + suffix
+}
+
+// Normal makes text Normal
+func Normal(s ...string) string {
+	if len(s) > 0 {
+		out := prefix + normal + suffix + strings.Join(s, " ") + prefix + reset + suffix
+		return out
+	}
+	return prefix + normal + suffix
+}
+
+// Unitalic makes text Unitalic
+func Unitalic(s ...string) string {
+	if len(s) > 0 {
+		out := prefix + unitalic + suffix + strings.Join(s, " ") + prefix + reset + suffix
+		return out
+	}
+	return prefix + unitalic + suffix
+}
+
+// UnUnderlined makes text UnUnderlined
+func UnUnderlined(s ...string) string {
+	if len(s) > 0 {
+		out := prefix + ununderlined + suffix + strings.Join(s, " ") + prefix + reset + suffix
+		return out
+	}
+	return prefix + ununderlined + suffix
+}
+
+// Steady makes text Steady
+func Steady(s ...string) string {
+	if len(s) > 0 {
+		out := prefix + steady + suffix + strings.Join(s, " ") + prefix + reset + suffix
+		return out
+	}
+	return prefix + steady + suffix
+}
+
+// Positive makes text Positive
+func Positive(s ...string) string {
+	if len(s) > 0 {
+		out := prefix + positive + suffix + strings.Join(s, " ") + prefix + reset + suffix
+		return out
+	}
+	return prefix + positive + suffix
+}
+
+// Visible makes text Visible
+func Visible(s ...string) string {
+	if len(s) > 0 {
+		out := prefix + visible + suffix + strings.Join(s, " ") + prefix + reset + suffix
+		return out
+	}
+	return prefix + visible + suffix
+}
+
+// UnCross makes text UnCross
+func UnCross(s ...string) string {
+	if len(s) > 0 {
+		out := prefix + uncross + suffix + strings.Join(s, " ") + prefix + reset + suffix
+		return out
+	}
+	return prefix + uncross + suffix
 }
