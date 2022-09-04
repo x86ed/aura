@@ -15,8 +15,8 @@ const (
 	cross           = "9"
 	doubleUnderline = "21"
 	normal          = "22"
-	unitalic        = "23"
-	ununderlined    = "24"
+	unItalic        = "23"
+	unUnderlined    = "24"
 	steady          = "25"
 	positive        = "27"
 	visible         = "28"
@@ -125,21 +125,21 @@ func Normal(s ...string) string {
 }
 
 // Unitalic makes text Unitalic
-func Unitalic(s ...string) string {
+func UnItalic(s ...string) string {
 	if len(s) > 0 {
-		out := prefix + unitalic + suffix + strings.Join(s, " ") + prefix + reset + suffix
+		out := prefix + unItalic + suffix + strings.Join(s, " ") + prefix + reset + suffix
 		return out
 	}
-	return prefix + unitalic + suffix
+	return prefix + unItalic + suffix
 }
 
 // UnUnderlined makes text UnUnderlined
 func UnUnderlined(s ...string) string {
 	if len(s) > 0 {
-		out := prefix + ununderlined + suffix + strings.Join(s, " ") + prefix + reset + suffix
+		out := prefix + unUnderlined + suffix + strings.Join(s, " ") + prefix + reset + suffix
 		return out
 	}
-	return prefix + ununderlined + suffix
+	return prefix + unUnderlined + suffix
 }
 
 // Steady makes text Steady

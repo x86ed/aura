@@ -14,6 +14,7 @@ import (
 type spectrum struct {
 	bg256 [13][13]int
 	rgb   [][]int
+	grey  []int
 }
 
 var p256 bool
