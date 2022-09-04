@@ -177,3 +177,7 @@ func UnCross(s ...string) string {
 	}
 	return prefix + uncross + suffix
 }
+
+func Reset() string {
+	return prefix + reset + suffix
+}

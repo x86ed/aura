@@ -243,3 +243,9 @@ func TestUnCross(t *testing.T) {
 		t.Errorf("Expected: %s%s%s Got: %s", prefix, uncross, suffix, ttt)
 	}
 }
+
+func TestReset(t *testing.T) {
+	if Reset() != prefix+reset+suffix {
+		t.Errorf("Expected: %s%s%s Got: %s", prefix, reset, suffix, Reset())
+	}
+}
