@@ -8,7 +8,7 @@ import (
 	"fmt"
 
 	"github.com/spf13/cobra"
-	"github.com/x86ed/aura/v2/color"
+	"github.com/x86ed/aura/color"
 )
 
 type spectrum struct {
