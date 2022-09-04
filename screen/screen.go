@@ -11,6 +11,7 @@ type S struct {
 	Height int
 }
 
+// GetDims gets the screen's dimensions
 func (s *S) GetDims() error {
 	var err error
 	s.Width, s.Height, err = terminal.GetSize(int(os.Stdin.Fd()))
