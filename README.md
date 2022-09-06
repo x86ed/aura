@@ -18,7 +18,7 @@ This library allows you to set cursor commands. For example `cursor.Move2Coord(2
 
 ### erase
 
-This libarary is used to erase various pieces of content on the screen.
+This library is used to erase various pieces of content on the screen.
 
 ### screen
 
@@ -39,6 +39,10 @@ Image is a library that can re-render images to ascii including gifs.
 ### modal
 
 This library create modals which can hold any of the content listed above.
+
+### select
+
+This library allows you to make multi select options
 
 ### grid
 
