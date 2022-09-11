@@ -17,13 +17,16 @@ var rgb bool
 // spectrumCmd represents the spectrum command
 var spectrumCmd = &cobra.Command{
 	Use:   "spectrum",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Displays various spectrums",
+	Long: `Displays various specrums supported by the X11 terminal:
+	16 Color - System color pallete. This is set by the terminal preferences but matches the default Low and Hi 8 color palletes
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	256 Color - 216 color color cube pallete as defined by the 256 color pallete
+
+	24 Shade Grey - greyscale from the 256 color pallete
+	
+	RGB Color - 24 bit RGB color
+	`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println(genSpectrums())
 	},

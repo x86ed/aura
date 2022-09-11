@@ -29,6 +29,7 @@ type ProgBar struct {
 	Erase    func() string
 	Offset   Coord
 	Spinner  bool
+	IsOffset bool
 }
 
 func (p *ProgBar) Draw() {
@@ -41,6 +42,7 @@ func (p *ProgBar) Hide() {
 }
 
 func (p *ProgBar) Interrupt() error {
+	p.Count = p.Capacity
 	return nil
 }
 
@@ -54,6 +56,7 @@ func (p *ProgBar) ChannelUpdate(c chan int) {
 			select {
 			case msg := <-c:
 				p.Count += msg
+				p.Draw()
 			}
 		}
 	}()

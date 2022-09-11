@@ -8,9 +8,11 @@ import (
 	"time"
 	"unicode/utf8"
 
+	"github.com/x86ed/aura/color"
 	"github.com/x86ed/aura/cursor"
 	"github.com/x86ed/aura/erase"
 	"github.com/x86ed/aura/screen"
+	"github.com/x86ed/aura/util"
 )
 
 type BasicProg struct {
@@ -18,16 +20,18 @@ type BasicProg struct {
 }
 
 func drawBar(b, c string, l, f int) string {
-	var out string
+	out, off := util.EscOffset(color.TxtRGB(0xde, 0xfa, 0xce))
+	// var out string
 	for i := 0; i < l; i++ {
 		out += b
 	}
 	if c != " " {
 		out += c
 	}
-	for utf8.RuneCountInString(out) < f {
+	for utf8.RuneCountInString(out)-off < f {
 		out += " "
 	}
+	out += color.Reset()
 	return out
 }
 
@@ -92,22 +96,25 @@ func (p *BasicProg) basicDraw(m []uint) string {
 	}
 	bl := p.Dims.X - (utf8.RuneCountInString(out) - 1 + utf8.RuneCountInString(lCap) + utf8.RuneCountInString(rCap))
 
-	if bl < 100 {
+	if bl < 100 || p.Spinner {
 		p.Spinner = true
-		var count int
-		out := strings.Replace(out, "*", string(spin[count%utf8.RuneCountInString(spin)]), -1)
+		out := strings.Replace(out, "*", spin[p.Count%len(spin)], -1)
 		return out
 
 	}
 
 	b := p.Count * bl / p.Capacity
-	t := int(float64(p.Count)*float64(bl)/float64(p.Capacity)-float64(b)) * len(endBar)
+	t := int((float64(p.Count)*float64(bl)/float64(p.Capacity) - float64(b)) * float64(len(endBar)))
 	out = strings.Replace(out, "*", lCap+drawBar(bar, endBar[t], b, bl)+rCap, -1)
 	return out
 }
 
 func (p *BasicProg) basicErase() string {
-	return cursor.Up(2) + erase.Line()
+	out := cursor.Up(2) + erase.Line()
+	if p.IsOffset {
+		out = cursor.Move2Coord(p.Offset.X, p.Offset.Y) + out
+	}
+	return out
 }
 
 func (b *BasicProg) New() *BasicProg {
@@ -119,5 +126,6 @@ func (b *BasicProg) New() *BasicProg {
 	b.Dims.Y = 1
 	b.DrawBar = b.basicDraw
 	b.Erase = b.basicErase
+	b.Start()
 	return b
 }
