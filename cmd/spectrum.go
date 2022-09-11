@@ -11,13 +11,8 @@ import (
 	"github.com/x86ed/aura/color"
 )
 
-type spectrum struct {
-	bg256 [13][13]int
-	rgb   [][]int
-	grey  []int
-}
-
 var p256 bool
+var rgb bool
 
 // spectrumCmd represents the spectrum command
 var spectrumCmd = &cobra.Command{
@@ -36,28 +31,28 @@ to quickly create a Cobra application.`,
 
 func genSpectrums() string {
 	var ss string
-	var spec = spectrum{bg256: [13][13]int{
-		{231, 231, 231, 231, 231, 231, 231, 231, 231, 231, 231, 231, 231},
-		{254, 224, 213, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{252, 217, 212, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{250, 210, 211, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{248, 210, 209, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{246, 203, 209, 0, 0, 83, 0, 0, 0, 0, 0, 0, 0},
-		{244, 196, 208, 228, 118, 46, 48, 51, 33, 21, 93, 201, 198},
-		{242, 160, 172, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{240, 124, 136, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{238, 88, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{236, 1, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{234, 52, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-		{16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16},
-	}}
-
 	if p256 {
-		for i := 0; i < 13; i++ {
-			for j := 0; j < 13; j++ {
-				ss += color.Bg256(spec.bg256[i][j], fmt.Sprintf(" %3d ", spec.bg256[i][j]))
+		ss += "             Standard Color\n                (system)\n"
+		for c := 0; c < 16; c++ {
+			ss += color.Bg256(c, fmt.Sprintf(" %3d ", c))
+			if c == 7 {
+				ss += "\n                Hi Color\n                (system)\n"
 			}
-			ss += "\n"
+		}
+		ss += "\n                216 Color\n     "
+		for i := 16; i < 232; i++ {
+			ss += color.Bg256(i, fmt.Sprintf(" %3d ", i))
+			if i%3 == 0 && i%2 == 1 {
+				ss += "\n     "
+			}
+		}
+		ss += "\n                Greyscale\n    "
+		for g := 232; g < 256; g++ {
+			l := " "
+			if g == 232 || g == 255 {
+				l = fmt.Sprintf(" %3d ", g)
+			}
+			ss += color.Bg256(g, l)
 		}
 		return ss
 	}
@@ -77,4 +72,5 @@ func init() {
 	// is called directly, e.g.:
 	// spectrumCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	spectrumCmd.Flags().BoolVarP(&p256, "256", "x", false, "Display 256 color spectrum")
+	spectrumCmd.Flags().BoolVarP(&rgb, "rgb", "c", false, "Display RGB 24 bit spectrum")
 }

@@ -28,10 +28,6 @@ This library can set screen resolution/params and get info about the screen.
 
 This library styles text.
 
-### keymap
-
-This library allows you to remap keys. including key combinations.
-
 ### image
 
 Image is a library that can re-render images to ascii including gifs.
