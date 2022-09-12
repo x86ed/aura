@@ -5,14 +5,8 @@ import (
 	"github.com/x86ed/aura/util"
 )
 
-type Coordinate struct {
-	X int
-	Y int
-}
-
 type Modal struct {
-	Dimensions Coordinate
-	Offset     Coordinate
+	util.RenderObj
 	Content    util.Renderable
 	Buttons    map[string]func()
 	Padding    int

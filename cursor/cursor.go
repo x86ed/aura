@@ -103,9 +103,9 @@ func Restore(flag ...bool) string {
 
 func Move2Coord(x, y int, alt ...bool) string {
 	if len(alt) > 0 && alt[0] {
-		return prefix + strconv.Itoa(x) + ";" + strconv.Itoa(y) + "f"
+		return prefix + strconv.Itoa(y) + ";" + strconv.Itoa(x) + "f"
 	}
-	return prefix + strconv.Itoa(x) + ";" + strconv.Itoa(y) + home
+	return prefix + strconv.Itoa(y) + ";" + strconv.Itoa(x) + home
 }
 
 // Invisible makes the cursor invisible

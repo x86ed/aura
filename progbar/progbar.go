@@ -3,6 +3,8 @@ package progbar
 import (
 	"fmt"
 	"time"
+
+	"github.com/x86ed/aura/util"
 )
 
 const (
@@ -14,22 +16,15 @@ const (
 	Rate
 )
 
-type Coord struct {
-	X, Y int
-}
-
 type ProgBar struct {
-	Label    string
+	util.RenderObj
 	Capacity int
 	Count    int
 	Modes    []uint
-	Dims     Coord
 	Started  time.Time
 	DrawBar  func([]uint) string
 	Erase    func() string
-	Offset   Coord
 	Spinner  bool
-	IsOffset bool
 }
 
 func (p *ProgBar) Draw() {
