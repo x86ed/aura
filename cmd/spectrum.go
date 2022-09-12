@@ -64,16 +64,6 @@ func genSpectrums() string {
 
 func init() {
 	rootCmd.AddCommand(spectrumCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// spectrumCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// spectrumCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	spectrumCmd.Flags().BoolVarP(&p256, "256", "x", false, "Display 256 color spectrum")
 	spectrumCmd.Flags().BoolVarP(&rgb, "rgb", "c", false, "Display RGB 24 bit spectrum")
 }

@@ -99,7 +99,7 @@ func (q *QR) QRFromText(s string) error {
 func (q *QR) Hide() {
 	out := cursor.Home()
 	if q.IsOffset {
-		out = cursor.Move2Coord(q.Offset.X, q.Offset.Y) + out
+		out += cursor.Move2Coord(q.Offset.X, q.Offset.Y)
 	}
 	fmt.Print(out)
 }

@@ -20,7 +20,7 @@ var value string
 // imageCmd represents the image command
 var imageCmd = &cobra.Command{
 	Use:   "image",
-	Short: "A brief description of your command",
+	Short: "displays images in the terminal",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
@@ -52,12 +52,12 @@ to quickly create a Cobra application.`,
 			i := img.Img{
 				FilePath: txt,
 				File:     img.JPG,
-				Fit:      img.FitWidth,
+				Fit:      img.Fit,
 			}
-			//i.Dims = util.Coord{X: scr.Width, Y: scr.Height}
-			i.Dims = util.Coord{X: 60, Y: 60}
-			i.Offset = util.Coord{X: 20, Y: 5}
-			i.IsOffset = true
+			i.Dims = util.Coord{X: scr.Width, Y: scr.Height}
+			// // i.Dims = util.Coord{X: 60, Y: 60}
+			// i.Offset = util.Coord{X: 20, Y: 5}
+			// i.IsOffset = true
 			i.Draw()
 		}
 	},
@@ -65,16 +65,6 @@ to quickly create a Cobra application.`,
 
 func init() {
 	rootCmd.AddCommand(imageCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// imageCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// imageCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 	imageCmd.Flags().BoolVarP(&qr, "QR", "q", false, "draws a QR Code that points to https://github.com/x86ed/aura or a value specified by the --value (-v) flag")
 	imageCmd.Flags().BoolVarP(&jpg, "jpg", "j", false, "draws a jpg a value specified by the --value (-v) flag")
 	imageCmd.Flags().StringVarP(&value, "value", "v", "", "string value passed in to method (values with spaces need to be contained in quotes)")

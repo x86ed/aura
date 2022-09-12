@@ -12,17 +12,11 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "v2",
-	Short: "A brief description of your application",
-	Long: `A longer description that spans multiple lines and likely contains
-examples and usage of using your application. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	// Uncomment the following line if your bare application
-	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+	Use:   "aura",
+	Short: "A visualization library for x11 based terminals",
+	Long: `A visulaization library that allows for images and figures to be displayed in the terminal. 
+	
+The following are a set of demos that shows how the tool can be used to enhance your user experience`,
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -43,5 +37,4 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

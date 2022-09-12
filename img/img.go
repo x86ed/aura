@@ -47,15 +47,15 @@ type Img struct {
 // Draw Renderable interface method
 func (i *Img) Draw() {
 	i.Hide()
-	e := i.Load()
+	e := i.load()
 	if e != nil {
 		fmt.Println(e)
 	}
-	e = i.Scale2Dims(i.Fit)
+	e = i.scale2Dims(i.Fit)
 	if e != nil {
 		fmt.Println(e)
 	}
-	i.Print2Screen()
+	i.print2Screen()
 }
 
 // Hide Renderable interface method
@@ -72,8 +72,8 @@ func (i *Img) Interrupt() error {
 	return nil
 }
 
-// Load loads pixel data for an image
-func (i *Img) Load() error {
+// load loads pixel data for an image
+func (i *Img) load() error {
 	file, err := os.OpenFile(i.FilePath, os.O_RDONLY, 0644)
 	if err != nil {
 		return err
@@ -106,9 +106,8 @@ func (i *Img) Load() error {
 	return nil
 }
 
-// TODO: finish
-// Scale2Dims resizes an image to the
-func (i *Img) Scale2Dims(s Scale) error {
+// scale2Dims resizes an image to the
+func (i *Img) scale2Dims(s Scale) error {
 
 	var sx, sy int
 	switch s {
@@ -146,6 +145,7 @@ func (i *Img) Scale2Dims(s Scale) error {
 	return nil
 }
 
+// fixCrop helper function that removes black dead space from the top of cropped images
 func fixCrop(a [][]Pixel, lim int) [][]Pixel {
 	return a[lim:]
 }
@@ -181,7 +181,15 @@ func (i *Img) calcFit(b ...bool) (int, int) {
 		return int(nx), ny
 	}
 
-	return 0, 0
+	if by > bx {
+		ny := by
+		nx := float32(ix) * y2y
+		return int(nx), ny
+	}
+
+	nx := bx
+	ny := float32(iy) * x2x
+	return nx, int(ny)
 }
 
 func (i *Img) RGBArray2Ascii(arr [][]Pixel) string {
@@ -198,7 +206,8 @@ func (i *Img) RGBArray2Ascii(arr [][]Pixel) string {
 	return out
 }
 
-func (i *Img) Print2Screen() {
+// Print2Screen prints
+func (i *Img) print2Screen() {
 	out := i.RGBArray2Ascii(i.Pixels)
 	fmt.Print(out)
 }

@@ -112,7 +112,7 @@ func (p *BasicProg) basicDraw(m []uint) string {
 func (p *BasicProg) basicErase() string {
 	out := cursor.Up(2) + erase.Line()
 	if p.IsOffset {
-		out = cursor.Move2Coord(p.Offset.X, p.Offset.Y) + out
+		out += cursor.Move2Coord(p.Offset.X, p.Offset.Y)
 	}
 	return out
 }
