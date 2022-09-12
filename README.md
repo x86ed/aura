@@ -30,6 +30,10 @@ This library styles text.
 
 ### image
 
+<img width="518" alt="Screen Shot 2022-09-12 at 2 09 25 AM" src="https://user-images.githubusercontent.com/660891/189616561-4b2f7009-3337-402d-b7fe-523e448453e1.png">
+
+<img width="277" alt="Screen Shot 2022-09-12 at 2 14 30 AM" src="https://user-images.githubusercontent.com/660891/189617089-3314e960-8a1c-4ac6-a709-7f15c7d39930.png">
+
 Image is a library that can re-render images to ascii including gifs.
 
 ### modal
