@@ -2,8 +2,10 @@ package util
 
 // Renderable is the interface all objects drawable on the screen must use
 type Renderable interface {
-	Draw()
-	Hide()
+	// Draw draws the method the first Coord value represents the offset.
+	// The second represents
+	Draw(...Coord)
+	Hide(...Coord)
 	Interrupt() error
 }
 
