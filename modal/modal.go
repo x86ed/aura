@@ -1,7 +1,10 @@
 package modal
 
 import (
-	"github.com/x86ed/aura/screen"
+	"fmt"
+	"strings"
+
+	"github.com/x86ed/aura/cursor"
 	"github.com/x86ed/aura/util"
 )
 
@@ -16,11 +19,52 @@ type Modal struct {
 }
 
 type ModalGlyph struct {
-	LUC, LLC, RUC, RBC, L, U, R, D string
+	LUC, LDC, RUC, RDC, L, U, R, D, F string
 }
 
-func (m *Modal) Draw() {
-	Scr := screen.S{}
-	Scr.GetDims()
+func (m *Modal) Draw(o ...util.Coord) {
+	var out string
+	var app string
+	if len(o) > 0 {
+		m.IsOffset = true
+		m.Offset.Y += o[0].Y
+		m.Offset.X += o[0].X
+	}
+	if m.IsOffset == true {
+		out += cursor.Move2Coord(m.Offset.X, m.Offset.Y)
+		app = cursor.Column(m.Offset.X)
+	}
+	out += m.GFX.LUC + strings.Repeat(m.GFX.U, m.Dims.X-2) + m.GFX.RUC + "\n" + app
+	for i := 0; i < m.Dims.Y-2; i++ {
+		out += m.GFX.L + strings.Repeat(m.GFX.F, m.Dims.X-2) + m.GFX.R + "\n" + app
+	}
+	out += m.GFX.LDC + strings.Repeat(m.GFX.D, m.Dims.X-2) + m.GFX.RDC + "\n" + app
+	fmt.Print(out)
+}
 
+// Hide Renderable interface method
+func (m *Modal) Hide(o ...util.Coord) {
+	var app string
+	if len(o) > 0 {
+		m.IsOffset = true
+		m.Offset.Y += o[0].Y
+		m.Offset.X += o[0].X
+	}
+	if m.IsOffset {
+		fmt.Print(cursor.Move2Coord(m.Offset.X, m.Offset.Y))
+		app = cursor.Column(m.Offset.X)
+	}
+	var p string
+	for l := 0; l < m.Dims.Y; l++ {
+		for c := 0; c < m.Dims.X; c++ {
+			p += " "
+		}
+		p += "\n" + app
+	}
+	fmt.Print(p)
+}
+
+// Interrupt Renderable interface method
+func (m *Modal) Interrupt() error {
+	return nil
 }

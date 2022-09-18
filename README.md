@@ -58,4 +58,4 @@ a package that allows you to render simple graphs.
 
 ## CLI
 
-the cli allows you to generate tons of terminal strings in various languages. Here's how to use it:
+The CLI demos various different settingsof aura

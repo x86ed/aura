@@ -11,7 +11,6 @@ import (
 	"github.com/anthonynsimon/bild/transform"
 	acolor "github.com/x86ed/aura/color"
 	"github.com/x86ed/aura/cursor"
-	"github.com/x86ed/aura/erase"
 	"github.com/x86ed/aura/util"
 )
 
@@ -45,8 +44,14 @@ type Img struct {
 }
 
 // Draw Renderable interface method
-func (i *Img) Draw() {
-	i.Hide()
+func (i *Img) Draw(o ...util.Coord) {
+	if len(o) > 0 {
+		i.IsOffset = true
+		i.Offset = o[0]
+	}
+	if i.IsOffset {
+		fmt.Print(cursor.Move2Coord(i.Offset.X, i.Offset.Y))
+	}
 	e := i.load()
 	if e != nil {
 		fmt.Println(e)
@@ -59,12 +64,28 @@ func (i *Img) Draw() {
 }
 
 // Hide Renderable interface method
-func (i *Img) Hide() {
-	out := erase.ToScreenEnd()
-	if i.IsOffset {
-		out = cursor.Move2Coord(i.Offset.X, i.Offset.Y) + out
+func (i *Img) Hide(o ...util.Coord) {
+	if len(o) > 0 {
+		i.IsOffset = true
+		i.Offset = o[0]
 	}
-	fmt.Print(out)
+	if len(o) > 1 {
+		i.Dims.Y += o[0].Y
+		i.Dims.X += o[0].X
+	}
+	var app string
+	if i.IsOffset {
+		fmt.Print(cursor.Move2Coord(i.Offset.X, i.Offset.Y))
+		app = cursor.Column(i.Offset.X)
+	}
+	var p string
+	for l := 0; l < i.Dims.Y; l++ {
+		for c := 0; c < i.Dims.X; c++ {
+			p += " "
+		}
+		p += "\n" + app
+	}
+	fmt.Print(p)
 }
 
 // Interrupt Renderable interface method

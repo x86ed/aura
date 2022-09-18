@@ -52,10 +52,10 @@ to quickly create a Cobra application.`,
 			i := img.Img{
 				FilePath: txt,
 				File:     img.JPG,
-				Fit:      img.Fit,
+				Fit:      img.FitHeight,
 			}
 			i.Dims = util.Coord{X: scr.Width, Y: scr.Height}
-			// // i.Dims = util.Coord{X: 60, Y: 60}
+			// i.Dims = util.Coord{X: 30, Y: 30}
 			// i.Offset = util.Coord{X: 20, Y: 5}
 			// i.IsOffset = true
 			i.Draw()

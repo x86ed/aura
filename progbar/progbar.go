@@ -27,8 +27,12 @@ type ProgBar struct {
 	Spinner  bool
 }
 
-func (p *ProgBar) Draw() {
+func (p *ProgBar) Draw(o ...util.Coord) {
 	p.Hide()
+	if len(o) > 0 {
+		p.IsOffset = true
+		p.Offset = o[0]
+	}
 	fmt.Println(p.DrawBar(p.Modes))
 }
 

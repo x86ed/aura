@@ -96,20 +96,46 @@ func (q *QR) QRFromText(s string) error {
 	return nil
 }
 
-func (q *QR) Hide() {
-	out := cursor.Home()
-	if q.IsOffset {
-		out += cursor.Move2Coord(q.Offset.X, q.Offset.Y)
+func (q *QR) Hide(o ...util.Coord) {
+	if len(o) > 0 {
+		q.IsOffset = true
+		q.Offset = o[0]
 	}
-	fmt.Print(out)
+	if len(o) > 1 {
+		q.Dims.Y += o[0].Y
+		q.Dims.X += o[0].X
+	}
+	var app string
+	if q.IsOffset {
+		fmt.Print(cursor.Move2Coord(q.Offset.X, q.Offset.Y))
+		app = cursor.Column(q.Offset.X)
+	}
+	var p string
+	for l := 0; l < q.Dims.Y; l++ {
+		for c := 0; c < q.Dims.X; c++ {
+			p += " "
+		}
+		p += "\n" + app
+	}
+	fmt.Print(p)
 }
 
 func (q *QR) Interrupt() error {
 	return nil
 }
 
-func (q *QR) Draw() {
-	q.Hide()
+func (q *QR) Draw(o ...util.Coord) {
+	if len(o) > 0 {
+		q.IsOffset = true
+		q.Offset = o[0]
+	}
+	if len(o) > 1 {
+		q.Dims.Y += o[0].Y
+		q.Dims.X += o[0].X
+	}
+	if q.IsOffset {
+		fmt.Print(cursor.Move2Coord(q.Offset.X, q.Offset.Y))
+	}
 	raw, _ := qrcode.Encode(q.Value, q.Recovery, q.Size)
 	image.RegisterFormat("png", "png", png.Decode, png.DecodeConfig)
 	pixels, _ := getPixels(raw)
