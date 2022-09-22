@@ -15,6 +15,7 @@ import (
 
 var qr bool
 var jpg bool
+var gif bool
 var value string
 
 // imageCmd represents the image command
@@ -55,9 +56,21 @@ to quickly create a Cobra application.`,
 				Fit:      img.FitHeight,
 			}
 			i.Dims = util.Coord{X: scr.Width, Y: scr.Height}
-			// i.Dims = util.Coord{X: 30, Y: 30}
-			// i.Offset = util.Coord{X: 20, Y: 5}
-			// i.IsOffset = true
+			i.Draw()
+		}
+		if gif {
+			txt := "./img/v.gif"
+			if len(value) > 0 {
+				txt = value
+			}
+			var scr screen.S
+
+			scr.GetDims()
+			i := img.Gif{
+				FilePath: txt,
+				Fit:      img.FitHeight,
+			}
+			i.Dims = util.Coord{X: scr.Width, Y: scr.Height}
 			i.Draw()
 		}
 	},
@@ -67,5 +80,6 @@ func init() {
 	rootCmd.AddCommand(imageCmd)
 	imageCmd.Flags().BoolVarP(&qr, "QR", "q", false, "draws a QR Code that points to https://github.com/x86ed/aura or a value specified by the --value (-v) flag")
 	imageCmd.Flags().BoolVarP(&jpg, "jpg", "j", false, "draws a jpg a value specified by the --value (-v) flag")
+	imageCmd.Flags().BoolVarP(&gif, "gif", "g", false, "draws a gif a value specified by the --value (-v) flag")
 	imageCmd.Flags().StringVarP(&value, "value", "v", "", "string value passed in to method (values with spaces need to be contained in quotes)")
 }

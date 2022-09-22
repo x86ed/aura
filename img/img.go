@@ -81,7 +81,7 @@ func (i *Img) Hide(o ...util.Coord) {
 	var p string
 	for l := 0; l < i.Dims.Y; l++ {
 		for c := 0; c < i.Dims.X; c++ {
-			p += " "
+			p += "  "
 		}
 		p += "\n" + app
 	}
@@ -217,7 +217,7 @@ func (i *Img) RGBArray2Ascii(arr [][]Pixel) string {
 	var out string
 	for _, v := range arr {
 		for _, vv := range v {
-			out += acolor.BgRGB(vv.R, vv.G, vv.B) + " "
+			out += acolor.BgRGB(vv.R, vv.G, vv.B) + "  "
 		}
 		out += acolor.Reset() + "\n"
 		if i.IsOffset {

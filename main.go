@@ -11,6 +11,11 @@ import (
 	"github.com/x86ed/aura/cmd"
 )
 
+const (
+	exitCodeErr       = 1
+	exitCodeInterrupt = 2
+)
+
 //go:embed aura.txt
 var aura string
 

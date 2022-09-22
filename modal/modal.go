@@ -3,6 +3,7 @@ package modal
 import (
 	"fmt"
 	"strings"
+	"unicode/utf8"
 
 	"github.com/x86ed/aura/cursor"
 	"github.com/x86ed/aura/util"
@@ -40,6 +41,14 @@ func (m *Modal) Draw(o ...util.Coord) {
 	}
 	out += m.GFX.LDC + strings.Repeat(m.GFX.D, m.Dims.X-2) + m.GFX.RDC + "\n" + app
 	fmt.Print(out)
+	newOff := m.Offset
+	newOff.X += (utf8.RuneCountInString(m.GFX.L) + m.Padding)
+	newOff.Y += (utf8.RuneCountInString(m.GFX.U) + m.Padding)
+	newDim := m.Dims
+	newDim.X -= (utf8.RuneCountInString(m.GFX.L) + utf8.RuneCountInString(m.GFX.R) + (m.Padding * 2))
+	newDim.Y -= (utf8.RuneCountInString(m.GFX.U) + utf8.RuneCountInString(m.GFX.D) + (m.Padding * 2))
+	padding := util.Coord{X: (utf8.RuneCountInString(m.GFX.L) + m.Padding), Y: (utf8.RuneCountInString(m.GFX.U) + m.Padding)}
+	m.Content.Draw(newOff, newDim, padding)
 }
 
 // Hide Renderable interface method
