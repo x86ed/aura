@@ -217,7 +217,7 @@ func (i *Img) RGBArray2Ascii(arr [][]Pixel) string {
 	var out string
 	for _, v := range arr {
 		for _, vv := range v {
-			out += acolor.BgRGB(vv.R, vv.G, vv.B) + "  "
+			out += acolor.BgRGB(vv.R, vv.G, vv.B) + " "
 		}
 		out += acolor.Reset() + "\n"
 		if i.IsOffset {

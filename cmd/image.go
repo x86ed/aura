@@ -54,7 +54,7 @@ to quickly create a Cobra application.`,
 			i := img.Img{
 				FilePath: txt,
 				File:     img.PNG,
-				Fit:      img.FitHeight,
+				Fit:      img.FitWidth,
 			}
 			i.Dims = util.Coord{X: scr.Width, Y: scr.Height}
 			i.Draw()
