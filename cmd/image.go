@@ -76,7 +76,7 @@ to quickly create a Cobra application.`,
 			i.Draw()
 		}
 		if gif {
-			txt := "./img/v.gif"
+			txt := "./img/Y5S2G5.gif"
 			if len(value) > 0 {
 				txt = value
 			}

@@ -174,7 +174,7 @@ func fixCrop(a [][]Pixel, lim int) [][]Pixel {
 func (i *Img) calcFit(b ...bool) (int, int) {
 	// get xy values
 	ib := i.Image.Bounds()
-	ix, iy := ib.Max.X, ib.Max.Y
+	ix, iy := ib.Max.X*2, ib.Max.Y
 	bx, by := i.Dims.X, i.Dims.Y
 	// x/y rations
 	ir := float32(ix) / float32(iy)
