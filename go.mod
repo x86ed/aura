@@ -1,8 +1,8 @@
 module github.com/x86ed/aura
 
-go 1.17
+go 1.23.0
 
-require golang.org/x/crypto v0.31.0
+require golang.org/x/crypto v0.35.0
 
 require (
 	github.com/inconshreveable/mousetrap v1.0.1 // indirect
@@ -13,6 +13,6 @@ require (
 	github.com/anthonynsimon/bild v0.13.0
 	github.com/skip2/go-qrcode v0.0.0-20200617195104-da1b6568686e
 	github.com/spf13/cobra v1.5.0
-	golang.org/x/sys v0.28.0 // indirect
-	golang.org/x/term v0.27.0 // indirect
+	golang.org/x/sys v0.30.0 // indirect
+	golang.org/x/term v0.29.0 // indirect
 )
